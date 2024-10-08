@@ -1,0 +1,2 @@
+<?xml version="1.0"?>
+<cart><order><product_id>1</product_id><quantity>14</quantity><product_price><price>4</price><currency>EUR</currency></product_price></order><order><product_id>2</product_id><quantity>30</quantity><product_price><price>20</price><currency>EUR</currency></product_price></order><order><product_id>3</product_id><quantity>10</quantity><product_price><price>20</price><currency>EUR</currency></product_price></order></cart>

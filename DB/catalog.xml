@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<products>
+    <product>
+        <id>1</id>
+        <name>Smartphone</name>
+        <stock>133</stock>
+        <price>299.99</price>
+    </product>
+    <product>
+        <id>2</id>
+        <name>Laptop</name>
+        <stock>24</stock>
+        <price>899.99</price>
+    </product>
+    <product>
+        <id>3</id>
+        <name>Tablet</name>
+        <stock>31</stock>
+        <price>199.99</price>
+    </product>
+    <product>
+        <id>4</id>
+        <name>Wireless Mouse</name>
+        <stock>99</stock>
+        <price>24.99</price>
+    </product>
+    <product>
+        <id>5</id>
+        <name>Keyboard</name>
+        <stock>79</stock>
+        <price>49.99</price>
+    </product>
+    <product>
+        <id>6</id>
+        <name>Headphones</name>
+        <stock>149</stock>
+        <price>74.99</price>
+    </product>
+    <product>
+        <id>7</id>
+        <name>Smartwatch</name>
+        <stock>60</stock>
+        <price>199.99</price>
+    </product>
+    <product>
+        <id>8</id>
+        <name>Portable Charger</name>
+        <stock>200</stock>
+        <price>29.99</price>
+    </product>
+    <product>
+        <id>9</id>
+        <name>External Hard Drive</name>
+        <stock>36</stock>
+        <price>89.99</price>
+    </product>
+    <product>
+        <id>10</id>
+        <name>Monitor 24"</name>
+        <stock>25</stock>
+        <price>149.99</price>
+    </product>
+</products>
