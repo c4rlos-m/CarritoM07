@@ -34,6 +34,7 @@ function getCart() {
         echo "Cargando carrito existente para $username <br>";
         $cart = simplexml_load_file($cartFile);
     }
+    
 
     return $cart;
 }
@@ -78,12 +79,18 @@ function addProduct($prod_id, $quantity) {
         return;
     }
 
+    // Crear el nodo 'items' si no existe
+    if (!$cart->items) {
+        $cart->addChild('items');
+    }
+
     // Verificar si el producto ya está en el carrito
     $productFound = false;
-    foreach ($cart->item as $item) {
+    foreach ($cart->items->item as $item) {
         if ((string)$item->product_id === (string)$prod_id) {
             // Producto encontrado, incrementar la cantidad
             $item->quantity = intval($item->quantity) + $quantity; // Sumar cantidad
+            $item->price = floatval($item->price) + ($price * $quantity); // Actualizar precio total
             $productFound = true;
             echo "Cantidad del producto actualizada en el carrito. <br>";
             break;
@@ -94,10 +101,10 @@ function addProduct($prod_id, $quantity) {
     if (!$productFound) {
         echo "Añadiendo nuevo producto al carrito.<br>";
         // Crear un nuevo pedido en el carrito
-        $item = $cart->addChild('item');
+        $item = $cart->items->addChild('item');
         $item->addChild('product_id', $prod_id);
         $item->addChild('quantity', $quantity);
-        $item->addChild('price', $price * $quantity);
+        $item->addChild('price', $price * $quantity); // Precio total del nuevo producto
     }
 
     // Restar el stock disponible
@@ -113,16 +120,61 @@ function addProduct($prod_id, $quantity) {
 
 
 
-function clearCart(){
+
+function clearCart() {
     if (!isLogged()) {
         echo "Debe iniciar sesión para vaciar el carrito.";
         return;
     }
 
     $cartFile = 'DB/carts/cart_' . $_SESSION['username'] . '.xml';
+
     if (file_exists($cartFile)) {
-        unlink($cartFile); // Eliminar el archivo de carrito del usuario
-        echo "El carrito ha sido vaciado.";
+        // Cargar el carrito existente
+        $cart = simplexml_load_file($cartFile);
+
+        // Comprobar si hay elementos en el carrito
+        if (empty($cart->items->item)) {
+            echo "El carrito está vacío.";
+            return; // No hay nada que mover si está vacío
+        }
+
+        // Crear un nuevo nodo 'purchases' si no existe
+        if (!$cart->purchases) {
+            $cart->addChild('purchases');
+        }
+
+        // Usar un identificador único para la compra
+        $purchase = $cart->purchases->addChild("purchase");
+        $purchase->addAttribute("id", uniqid()); // Añadir atributo único
+
+        // Mover todos los items actuales a la sección 'purchase'
+        foreach ($cart->items->item as $item) {
+            $itemNode = $purchase->addChild('item'); // Añadir item al nodo purchase
+            $itemNode->addChild('product_id', (string)$item->product_id);
+            $itemNode->addChild('quantity', (string)$item->quantity);
+            $itemNode->addChild('price', (string)$item->price);
+        }
+
+        // Limpiar el carrito de manera correcta
+        // Aquí recopilamos todos los nodos a eliminar en un array
+        $itemsToRemove = [];
+        foreach ($cart->items->item as $item) {
+            $itemsToRemove[] = $item; // Guardar el nodo item para eliminarlo después
+        }
+
+        // Eliminar los nodos después de haber recopilado todos
+        foreach ($itemsToRemove as $item) {
+            $dom = dom_import_simplexml($item);
+            $dom->parentNode->removeChild($dom); // Remover el nodo item
+        }
+
+        // Guardar el carrito actualizado
+        if ($cart->asXML($cartFile)) {
+            echo "El carrito ha sido vaciado y los elementos han sido guardados en 'purchases'.";
+        } else {
+            echo "Error al guardar el carrito.";
+        }
     } else {
         echo "No se encontró el carrito.";
     }
@@ -262,12 +314,14 @@ function viewCart() {
 
     $cart = getCart(); // Cargar el carrito del usuario desde su archivo XML
     if (!$cart) {
+        echo "No se encontró el carrito.";
         return; // Si no hay carrito, detener la ejecución
     }
 
-    if (count($cart->item) == 0) {
+    // Verificar si el carrito tiene items
+    if (empty($cart->items->item)) { // Cambiado para verificar si está vacío
         echo "El carrito está vacío.";
-        return;
+        return; // Salir si el carrito está vacío
     }
 
     echo "<h2>Contenido del Carrito:</h2>";
@@ -276,10 +330,11 @@ function viewCart() {
 
     $totalCart = 0;
 
-    foreach ($cart->item as $item) {
+    // Iterar sobre los items en el carrito
+    foreach ($cart->items->item as $item) {
         $product_id = (string)$item->product_id;  
         $quantity = (int)$item->quantity;         
-        
+
         // Obtener el precio del producto usando la función existente
         $price = getItemPrice($product_id);
         
@@ -295,7 +350,7 @@ function viewCart() {
         echo "</tr>";
     }
 
-    // Mostrar el contenido del carrito
+    // Mostrar el total del carrito
     echo "<tr><td colspan='3' align='right'><strong>Total del Carrito:</strong></td><td id='cart-total'>{$totalCart}</td></tr>";
     echo "</table>";
 
@@ -305,8 +360,8 @@ function viewCart() {
     echo "¿Tienes un código de descuento? <input type='text' name='discount' id='discount'><br>";
     echo "<button type='submit'>Proceder al Checkout</button>"; // Botón de envío
     echo "</form>";
-
 }
+
 
 
 

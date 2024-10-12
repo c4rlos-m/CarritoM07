@@ -22,14 +22,16 @@ function checkout() {
         echo "Debe iniciar sesión para realizar la compra.";
         return;
     }
+
+    $cart = getCart();
+    if (!$cart || empty($cart->items->item)) {
+        echo "El carrito está vacío. No se puede proceder al checkout.";
+        echo "<br><a href='main.php'>Volver al catálogo</a>";
+        return; // Salir si el carrito está vacío
+    }
+    
     $username = $_SESSION['username'];
     $user = getUserFile();  // Obtener el archivo XML de usuarios
-
-    $cart = getCart();  // Obtener el carrito del usuario
-    if (count($cart->item) === 0) {  // Verificar si el carrito está vacío
-        echo "El carrito está vacío.";
-        return;
-    }
 
 
     // Variables para almacenar el total y posibles descuentos
@@ -43,7 +45,7 @@ function checkout() {
     echo "<tr><th>Producto ID</th><th>Cantidad</th><th>Precio Unitario</th><th>Total Producto</th></tr>";
 
     // Recorrer los productos en el carrito
-    foreach ($cart->item as $item) {
+    foreach ($cart->items->item as $item) {
         $prod_id = (string)$item->product_id;
         $quantity = (int)$item->quantity;
         $price = getItemPrice($prod_id);  // Obtener el precio del producto desde el catálogo
@@ -72,22 +74,23 @@ function checkout() {
     }
     //verificar los descuentos
 
-    $discountCode = $_GET['discount'];
+    if (isset($_GET['discount'])) {
+        $discountCode = $_GET['discount'];
+        $discountData = getDiscount($discountCode);
 
-    $discountData = getDiscount($discountCode);
+        if ($discountData) {
+            $discountCode = $discountData['code'];
+            $discountPercentage = $discountData['percentage'];
 
-    if ($discountData) {  // Si el descuento es válido (no es null)
-        // Extraemos el monto del descuento y el código
-        $discountCode = $discountData['code']; 
-        $discountPercentage = $discountData['percentage']; 
+            $discountAmount = $total * $discountPercentage / 100;
+            $total -= $discountAmount;
 
-        $discountAmount = $total * $discountPercentage / 100;  // Calcular el monto del descuento
-        $total -= $discountAmount;  // Restar el descuento al total
-
-        echo "<tr class='discount-row'><td colspan='3' align='right'>Descuentos: {$discountCode}</td><td class='discount-amount'>-{$discountAmount} {$currency}</td></tr>";
-    } else {  // Si el descuento no es válido
-        echo "<tr class='error-row'><td colspan='4'>Código de descuento inválido: <strong><span class='discount-code'>{$discountCode}</span></strong></td></tr>";
+            echo "<tr class='discount-row'><td colspan='3' align='right'>Descuentos: {$discountCode}</td><td class='discount-amount'>-{$discountAmount} {$currency}</td></tr>";
+        } else {
+            echo "<tr class='error-row'><td colspan='4'>Código de descuento inválido: <strong><span class='discount-code'>{$discountCode}</span></strong></td></tr>";
+        }
     }
+
 
     echo "<tr><td colspan='3' align='right'><strong>Total:</strong></td><td id='cart-total'>{$total} {$currency}</td></tr>";
 
@@ -127,7 +130,7 @@ function checkout() {
     echo "<h3>Resumen de productos comprados:</h3>";
     echo $orderDetails;
 
-    header("refresh:5;url=main.php");  // Redireccionar a la página principal después de 5 segundos
+    header("refresh:30;url=main.php");  // Redireccionar a la página principal después de 5 segundos
 }
 
 ?>

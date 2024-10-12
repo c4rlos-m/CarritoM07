@@ -58,6 +58,11 @@ echo '</div><br>';
         $action = $_GET['action'];
 
         switch ($action) {
+
+            case 'view_catalog':
+                viewCatalog();  // Mostrar el catálogo
+                break;
+
             case 'view_cart':
                 viewCart();  // Mostrar el contenido del carrito
                 break;
@@ -90,10 +95,7 @@ echo '</div><br>';
                 clearCart();  // Limpiar el carrito
                 break;
 
-            case 'view_catalog':
-                viewCatalog();  // Mostrar el catálogo
-                break;
-
+            
             case 'add_balance':
                 if (isset($_GET['amount'])) {
                     addBalance($_GET['amount']);
@@ -117,6 +119,7 @@ echo '</div><br>';
     } else {
         // Si no hay acción específica, mostrar el catálogo por defecto
         viewCatalog();
+
     }
 }
 
