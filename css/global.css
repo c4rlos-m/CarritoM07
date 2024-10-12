@@ -1,0 +1,36 @@
+/* Estilos generales para la tabla */
+table {
+    width: 100%; /* Ajustar el ancho de la tabla */
+    border-collapse: collapse; /* Elimina los espacios entre las celdas */
+    margin: 20px 0; /* Margen superior e inferior */
+}
+
+/* Estilos para las celdas de la tabla */
+table th, table td {
+    border: 1px solid #ddd; /* Borde alrededor de las celdas */
+    padding: 8px; /* Espaciado interno */
+    text-align: left; /* Alinear texto a la izquierda */
+}
+
+/* Estilo de las cabeceras de la tabla */
+table th {
+    background-color: #f2f2f2; /* Color de fondo de la cabecera */
+    font-weight: bold; /* Texto en negrita */
+    color: #333; /* Color del texto */
+}
+
+/* Estilo para filas alternas */
+table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Color de fondo alterno para filas */
+}
+
+/* Estilo para el total del carrito */
+table tr td strong {
+    color: #333;
+    font-size: 16px; /* Aumentar el tamaño del texto */
+}
+
+/* Mejorar la apariencia en hover */
+table tr:hover {
+    background-color: #ddd; /* Cambia el fondo al pasar el cursor por encima */
+}

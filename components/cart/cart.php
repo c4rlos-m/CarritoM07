@@ -115,12 +115,7 @@ function removeFromCart($prod_id, $quantity) {
 }
 
 function viewCart() {
-    // Verificar si el usuario está logueado
-    if (!isLogged()) {
-        echo "Debe iniciar sesión para ver el carrito.";
-        return;
-    }
-
+    
     // Cargar el carrito desde el archivo XML
     $cart = getCart(); 
 

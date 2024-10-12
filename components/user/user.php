@@ -36,6 +36,7 @@ function addUser($username, $password, $email) {
         $newUser->addChild('username', $username);
         $newUser->addChild('password', $password);
         $newUser->addChild('email', $email);
+        $newUser->addChild('balance', 0);
         
         $userFile =  'DB/users.xml'; 
         
@@ -44,6 +45,23 @@ function addUser($username, $password, $email) {
         };
     }else{
         echo "Usuario ya existe ";
+    }
+}
+
+function addBalance($username, $amount){
+
+    $user = getUserFile();
+
+    foreach ($user->user as $userData) {
+        if ((string)$userData->username === $username) {
+            $userData->balance = (int)$userData->balance + $amount;
+            // echo "Saldo actualizado correctamente";
+            break;
+        }
+    }
+
+    if($user->asXML('DB/users.xml')){
+        echo "Saldo actualizado correctamente <br>";
     }
 }
 

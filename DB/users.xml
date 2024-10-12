@@ -1,2 +1,17 @@
 <?xml version="1.0"?>
-<users><user><id>6706a5c36a0a4</id><username>pepe</username><password>pepe*</password><email>pepe@email.com</email></user><user><id>6706af6427502</id><username>carlos</username><password>carlos*</password><email>pepe@email.com</email></user></users>
+<users>
+    <user>
+        <id>6706a5c36a0a4</id>
+        <username>pepe</username>
+        <password>pepe*</password>
+        <email>pepe@email.com</email>
+        <balance>1230</balance>
+    </user>
+    <user>
+        <id>6706af6427502</id>
+        <username>carlos</username>
+        <password>carlos*</password>
+        <email>pepe@email.com</email>
+        <balance>650</balance>
+    </user>
+</users>

@@ -3,14 +3,10 @@ function innitSession(){
     session_start();
 }
 
-function login() {
+function login($username, $password) {
     $user = getUserFile(); 
 
-    // Obtener los parámetros del formulario GET o POST
-    $username = isset($_GET['username']) ? $_GET['username'] : null;
-    $password = isset($_GET['password']) ? $_GET['password'] : null;
-
-    if (!empty($username) && !empty($password)) {
+   
         foreach ($user->user as $userData) {
             if ((string)$userData->username === $username && (string)$userData->password === $password) {
                 // Iniciar sesión
@@ -19,12 +15,8 @@ function login() {
                 return;
             }
         }
-        // Usuario o contraseña incorrectos
         echo "Usuario o contraseña incorrectos";
-    } else {
-        // Si el nombre de usuario o contraseña están vacíos
-        echo "Usuario o contraseña vacíos";
-    }
+    
 }
 
 function logout() {
