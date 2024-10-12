@@ -28,6 +28,7 @@ session_start();
 
 include 'components/user/user.php';  // Archivo que maneja login, sesión
 include 'components/cart/cart.php';  // Archivo que maneja carrito
+include 'components/catalog/catalog.php';  // Archivo que maneja catálogo
 
 // Verificar si hay sesión iniciada
 if (!isset($_SESSION['username'])) {
@@ -55,8 +56,9 @@ if (isset($_SESSION['username'])) {
                 break;
 
             case 'add_to_cart':
-                if (isset($_GET['prod_id'], $_GET['quantity'], $_GET['price'], $_GET['currency'])) {
-                    addToCart($_GET['prod_id'], $_GET['quantity'], $_GET['price'], $_GET['currency']);
+                if (isset($_GET['prod_id'], $_GET['quantity'])) {
+                    
+                    addToCart($_GET['prod_id'], $_GET['quantity']);
                 } else {
                     echo "Faltan parámetros para añadir al carrito.";
                 }
@@ -69,6 +71,13 @@ if (isset($_SESSION['username'])) {
                     echo "Faltan parámetros para eliminar del carrito.";
                 }
                 break;
+            case 'update_cart':
+                if (isset($_GET['prod_id'], $_GET['quantity'])) {
+                    updateCart($_GET['prod_id'], $_GET['quantity']);
+                } else {
+                    echo "Faltan parámetros para actualizar el carrito.";
+                }
+                break;
 
             case 'clear_cart':
                 clearCart();  // Limpiar el carrito
@@ -79,8 +88,8 @@ if (isset($_SESSION['username'])) {
                 break;
 
             case 'add_balance':
-                if (isset($_GET['username'], $_GET['amount'])) {
-                    addBalance($_GET['username'], $_GET['amount']);
+                if (isset($_GET['amount'])) {
+                    addBalance($_GET['amount']);
                 } else {
                     echo "Faltan parámetros para añadir saldo.";
                 }
@@ -100,33 +109,10 @@ if (isset($_SESSION['username'])) {
         }
     } else {
         // Si no hay acción específica, mostrar el catálogo por defecto
-        showCatalog();
+        viewCatalog();
     }
 }
 
-// Función que muestra el catálogo
-function showCatalog() {
-    $catalog = [
-        ['id' => 1, 'name' => 'Producto 1', 'price' => 10],
-        ['id' => 2, 'name' => 'Producto 2', 'price' => 20],
-        ['id' => 3, 'name' => 'Producto 3', 'price' => 30],
-    ];
 
-    echo "<h2>Catálogo de Productos</h2>";
-    echo "<table border='1'>";
-    echo "<tr><th>ID</th><th>Nombre</th><th>Precio</th></tr>";
-
-    foreach ($catalog as $product) {
-        echo "<tr>";
-        echo "<td>{$product['id']}</td>";
-        echo "<td>{$product['name']}</td>";
-        echo "<td>{$product['price']}</td>";
-        echo "</tr>";
-    }
-
-    echo "</table>";
-    echo "<br>Para añadir productos al carrito use la barra de búsqueda:<br>";
-    echo "?action=add_to_cart&prod_id=1&quantity=2&price=10&currency=EUR<br><br>";
-}
 ?>
 

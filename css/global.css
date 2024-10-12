@@ -1,22 +1,27 @@
 /* Estilos generales para la tabla */
+
 table {
-    width: 100%; /* Ajustar el ancho de la tabla */
+    width: 50%; /* Ajustar el ancho de la tabla */
     border-collapse: collapse; /* Elimina los espacios entre las celdas */
-    margin: 20px 0; /* Margen superior e inferior */
+    margin: 0; /* Margen superior e inferior */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para la tabla */
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Para que el borde redondeado funcione */
 }
 
 /* Estilos para las celdas de la tabla */
 table th, table td {
     border: 1px solid #ddd; /* Borde alrededor de las celdas */
-    padding: 8px; /* Espaciado interno */
+    padding: 12px; /* Espaciado interno */
     text-align: left; /* Alinear texto a la izquierda */
+    transition: background-color 0.3s; /* Transición suave para el fondo */
 }
 
 /* Estilo de las cabeceras de la tabla */
 table th {
-    background-color: #f2f2f2; /* Color de fondo de la cabecera */
+    background-color: #4c60af; /* Color de fondo de la cabecera */
     font-weight: bold; /* Texto en negrita */
-    color: #333; /* Color del texto */
+    color: #ffffff; /* Color del texto */
 }
 
 /* Estilo para filas alternas */
@@ -24,13 +29,25 @@ table tr:nth-child(even) {
     background-color: #f9f9f9; /* Color de fondo alterno para filas */
 }
 
+/* Estilo para filas impares */
+table tr:nth-child(odd) {
+    background-color: #ffffff; /* Color de fondo para filas impares */
+}
+
 /* Estilo para el total del carrito */
 table tr td strong {
-    color: #333;
+    color: #4c63af; /* Color verde para el texto del total */
     font-size: 16px; /* Aumentar el tamaño del texto */
 }
 
 /* Mejorar la apariencia en hover */
 table tr:hover {
     background-color: #ddd; /* Cambia el fondo al pasar el cursor por encima */
+}
+
+/* Estilos de responsividad */
+@media screen and (max-width: 600px) {
+    table {
+        font-size: 14px; /* Reducir el tamaño de fuente en pantallas pequeñas */
+    }
 }

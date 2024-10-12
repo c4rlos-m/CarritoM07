@@ -48,10 +48,10 @@ function addUser($username, $password, $email) {
     }
 }
 
-function addBalance($username, $amount){
+function addBalance($amount){
 
     $user = getUserFile();
-
+    $username = $_SESSION['username'];
     foreach ($user->user as $userData) {
         if ((string)$userData->username === $username) {
             $userData->balance = (int)$userData->balance + $amount;

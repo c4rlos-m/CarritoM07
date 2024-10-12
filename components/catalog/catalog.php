@@ -13,6 +13,28 @@ function getCatalogFile(){
     return $catalog;
 }
 
+function getItemPrice($prod_id) {
+    $catalog = getCatalogFile(); // Obtener el archivo de catálogo
+
+    foreach ($catalog->product as $item) {
+        if ((string)$item->id === (string)$prod_id) {
+            return (float)$item->price; // Retornar el precio del producto
+        }
+    }
+    return null; // Retornar null si no se encuentra el producto
+}
+
+function getItemStock($prod_id) {
+    $catalog = getCatalogFile(); // Obtener el archivo de catálogo
+
+    foreach ($catalog->product as $item) {
+        if ((string)$item->id === (string)$prod_id) {
+            return (int)$item->stock; // Retornar el stock del producto
+        }
+    }
+    return null; // Retornar null si no se encuentra el producto
+}
+
 function addStock($prod_id, $quantity){
     $catalog = getCatalogFile();
 
@@ -28,6 +50,32 @@ function addStock($prod_id, $quantity){
         echo "Stock actualizado correctamente <br>";
     }
 }
+
+function removeStock($prod_id, $quantity){
+    $catalog = getCatalogFile();
+
+    foreach ($catalog->product as $item) {
+        if ((string)$item->id === (string)$prod_id) {
+            $currentStock = (int)$item->stock;
+            if ($currentStock >= $quantity) {
+                $item->stock = $currentStock - $quantity; // Actualiza el stock
+                echo "Stock actualizado correctamente para el producto ID $prod_id.<br>";
+                break;
+            } else {
+                echo "Error: No hay suficiente stock para reducir.<br>";
+                return; // Detener si no hay suficiente stock
+            }
+        }
+    }
+
+    // Guardar el catálogo actualizado
+    if ($catalog->asXML('DB/catalog.xml')) {
+        echo "Stock guardado correctamente en el catálogo.<br>";
+    } else {
+        echo "Error al guardar el stock en el catálogo.<br>";
+    }
+}
+
 
 function viewCatalog(){
     $catalog = getCatalogFile();
@@ -46,6 +94,9 @@ function viewCatalog(){
 
 
     }
+    echo "</table>";
+    echo "<br>Para añadir productos al carrito use la barra de búsqueda:<br>";
+    echo "?action=add_to_cart&amp;prod_id=1&amp;quantity=2<br>";
     
 }
 
