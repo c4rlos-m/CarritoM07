@@ -29,6 +29,7 @@ session_start();
 include 'components/user/user.php';  // Archivo que maneja login, sesión
 include 'components/cart/cart.php';  // Archivo que maneja carrito
 include 'components/catalog/catalog.php';  // Archivo que maneja catálogo
+include 'components/checkout/checkout.php';  // Archivo que maneja checkout
 
 // Verificar si hay sesión iniciada
 if (!isset($_SESSION['username'])) {
@@ -44,7 +45,10 @@ if (!isset($_SESSION['username'])) {
 
 // Si el usuario ya ha iniciado sesión, mostrar las opciones
 if (isset($_SESSION['username'])) {
-    echo "<h2>Bienvenido, " . $_SESSION['username'] . "</h2>";
+    echo '<div class="header-container">';
+    echo '<h2 class="welcome-message">Bienvenido, ' . $_SESSION['username'] . '</h2>';
+    echo '<h2 class="balance-info">Saldo en la cuenta: ' . getUserBalance($_SESSION['username']) . ' EUR</h2>';
+    echo '</div><br>';
 
     // Procesar acciones según los parámetros de la URL
     if (isset($_GET['action'])) {

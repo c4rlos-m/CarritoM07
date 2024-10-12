@@ -297,6 +297,8 @@ function viewCart() {
 
     echo "<tr><td colspan='3' align='right'><strong>Total del Carrito:</strong></td><td>{$totalCart}</td></tr>";
     echo "</table>";
+
+    echo "Procced to checkout <a href='main.php?action=checkout'>Checkout</a>";
 }
 
 

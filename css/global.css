@@ -1,3 +1,27 @@
+
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Distribuir elementos a los lados opuestos */
+    align-items: center; /* Alinear verticalmente los elementos */
+    padding: 10px;
+    border-bottom: 1px solid #423ec6; /* Línea separadora si quieres */
+    margin-bottom: 20px; /* Espacio debajo del contenedor */
+}
+
+.welcome-message {
+    margin: 0; /* Eliminar márgenes de los títulos */
+    font-size: 20px; /* Ajustar el tamaño de la fuente según prefieras */
+    font-weight: bold;
+}
+
+.balance-info {
+    margin: 0; /* Eliminar márgenes de los títulos */
+    font-size: 20px; /* Ajustar el tamaño de la fuente */
+    font-weight: bold;
+}
+
+
+
 /* Estilos generales para la tabla */
 
 table {
