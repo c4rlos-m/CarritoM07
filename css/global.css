@@ -20,6 +20,38 @@
     font-weight: bold;
 }
 
+/* Estilos para la fila de descuentos */
+.discount-row {
+    background-color: #e6f7e6; /* Fondo verde claro para descuentos */
+    font-weight: bold; /* Negrita para el texto */
+}
+
+/* Estilos para la cantidad del descuento */
+.discount-amount {
+    color: #e31111; /* Color verde oscuro */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+#cart-total{
+    font-weight: bolder;
+    color: blue;
+    font-size: medium;
+}
+
+/* Estilos para las filas de error */
+.error-row {
+    background-color: #f8d7da; /* Fondo rojo claro para errores */
+    color: #bb1a2a; /* Color rojo oscuro */
+    font-weight: bold; /* Negrita para el texto */
+    /* text-transform: uppercase; */
+}
+
+/* Estilos para el código de descuento en error */
+.discount-code {
+    text-decoration: underline; /* Subrayar el código de descuento */
+    color: #c82333; /* Color rojo oscuro para el código */
+    text-transform: uppercase;
+}
 
 
 /* Estilos generales para la tabla */

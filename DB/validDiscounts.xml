@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<discounts>
+    <!-- Descuento por código -->
+    <discount>
+        <code>WELCOME10</code> <!-- Código de descuento -->
+        <description>10% de descuento en tu primera compra</description>
+        <percentage>10</percentage> <!-- Descuento del 10% -->
+        <valid_from>2024-01-01</valid_from>
+        <valid_to>2024-12-31</valid_to>
+    </discount>
+
+    <discount>
+        <code>SUMMER20</code> <!-- Código de descuento -->
+        <description>20% de descuento en compras de verano</description>
+        <percentage>20</percentage> <!-- Descuento del 20% -->
+        <valid_from>2024-06-01</valid_from>
+        <valid_to>2024-08-31</valid_to>
+    </discount>
+
+    <discount>
+        <code>FREESHIP</code> <!-- Código de descuento -->
+        <description>Envío gratuito en cualquier compra</description>
+        <percentage>0</percentage> <!-- Descuento del 0%, pero puedes usar lógica adicional para el envío gratuito -->
+        <valid_from>2024-01-01</valid_from>
+        <valid_to>2024-12-31</valid_to>
+        <free_shipping>true</free_shipping> <!-- Indicador de envío gratuito -->
+    </discount>
+
+    <discount>
+        <code>BLACKFRIDAY50</code> <!-- Código de descuento -->
+        <description>50% de descuento en el Black Friday</description>
+        <percentage>50</percentage> <!-- Descuento del 50% -->
+        <valid_from>2024-11-29</valid_from>
+        <valid_to>2024-11-30</valid_to>
+    </discount>
+
+    <discount>
+        <code>VIP25</code> <!-- Código de descuento -->
+        <description>25% de descuento exclusivo para clientes VIP</description>
+        <percentage>25</percentage> <!-- Descuento del 25% -->
+        <valid_from>2024-01-01</valid_from>
+        <valid_to>2024-12-31</valid_to>
+    </discount>
+</discounts>

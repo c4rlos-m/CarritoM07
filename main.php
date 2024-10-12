@@ -1,6 +1,7 @@
 <head>
     <title>Carrito</title>
     <link rel="stylesheet" type="text/css" href="css/global.css">
+    
 </head>
 
 <?php
@@ -31,6 +32,7 @@ include 'components/cart/cart.php';  // Archivo que maneja carrito
 include 'components/catalog/catalog.php';  // Archivo que maneja catálogo
 include 'components/checkout/checkout.php';  // Archivo que maneja checkout
 
+
 // Verificar si hay sesión iniciada
 if (!isset($_SESSION['username'])) {
     if (isset($_GET['username']) && isset($_GET['password'])) {
@@ -47,8 +49,9 @@ if (!isset($_SESSION['username'])) {
 if (isset($_SESSION['username'])) {
     echo '<div class="header-container">';
     echo '<h2 class="welcome-message">Bienvenido, ' . $_SESSION['username'] . '</h2>';
-    echo '<h2 class="balance-info">Saldo en la cuenta: ' . getUserBalance($_SESSION['username']) . ' EUR</h2>';
-    echo '</div><br>';
+    echo '<h2 class="balance-info" id="user-balance">Saldo en la cuenta: ' . getUserBalance($_SESSION['username']) . ' EUR</h2>';
+echo '</div><br>';
+
 
     // Procesar acciones según los parámetros de la URL
     if (isset($_GET['action'])) {

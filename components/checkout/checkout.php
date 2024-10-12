@@ -1,6 +1,8 @@
 <?php
 
 include_once 'components/user/user.php';
+include_once 'components/discounts/discounts.php';
+
 
 function getUserBalance($username){
     $user = getUserFile();
@@ -63,23 +65,31 @@ function checkout() {
         echo "<td>{$totalProduct} {$currency}</td>";
         echo "</tr>";
 
+        
         // Guardar detalles del pedido para el resumen
         $orderDetails .= "Producto ID: {$prod_id}, Cantidad: {$quantity}, Total: {$totalProduct} {$currency}<br>";
 
-        // Aquí puedes aplicar descuentos si es necesario
-        // Por ejemplo, 10% de descuento si compra más de 5 unidades de un producto
-        if ($quantity > 5) {
-            $discount = $totalProduct * 0.10;  // 10% de descuento
-            $discounts += $discount;
-            echo "<tr><td colspan='4'>Descuento aplicado: -{$discount} {$currency}</td></tr>";
-        }
+    }
+    //verificar los descuentos
+
+    $discountCode = $_GET['discount'];
+
+    $discountData = getDiscount($discountCode);
+
+    if ($discountData) {  // Si el descuento es válido (no es null)
+        // Extraemos el monto del descuento y el código
+        $discountCode = $discountData['code']; 
+        $discountPercentage = $discountData['percentage']; 
+
+        $discountAmount = $total * $discountPercentage / 100;  // Calcular el monto del descuento
+        $total -= $discountAmount;  // Restar el descuento al total
+
+        echo "<tr class='discount-row'><td colspan='3' align='right'>Descuentos: {$discountCode}</td><td class='discount-amount'>-{$discountAmount} {$currency}</td></tr>";
+    } else {  // Si el descuento no es válido
+        echo "<tr class='error-row'><td colspan='4'>Código de descuento inválido: <strong><span class='discount-code'>{$discountCode}</span></strong></td></tr>";
     }
 
-    // Aplicar descuento al total si corresponde
-    if ($discounts > 0) {
-        $total -= $discounts;
-        echo "<tr><td colspan='3' align='right'><strong>Total con descuentos:</strong></td><td>{$total} {$currency}</td></tr>";
-    }
+    echo "<tr><td colspan='3' align='right'><strong>Total:</strong></td><td id='cart-total'>{$total} {$currency}</td></tr>";
 
     echo "</table>";
 
@@ -116,6 +126,8 @@ function checkout() {
     // Mostrar un resumen final con los productos comprados
     echo "<h3>Resumen de productos comprados:</h3>";
     echo $orderDetails;
+
+    header("refresh:5;url=main.php");  // Redireccionar a la página principal después de 5 segundos
 }
 
 ?>

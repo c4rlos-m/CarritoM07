@@ -295,11 +295,19 @@ function viewCart() {
         echo "</tr>";
     }
 
-    echo "<tr><td colspan='3' align='right'><strong>Total del Carrito:</strong></td><td>{$totalCart}</td></tr>";
+    // Mostrar el contenido del carrito
+    echo "<tr><td colspan='3' align='right'><strong>Total del Carrito:</strong></td><td id='cart-total'>{$totalCart}</td></tr>";
     echo "</table>";
 
-    echo "Procced to checkout <a href='main.php?action=checkout'>Checkout</a>";
+    // Formulario para el código de descuento
+    echo "<form id='discount-form' action='main.php' method='GET'>";
+    echo "<input type='hidden' name='action' value='checkout'>"; // Campo oculto para la acción
+    echo "¿Tienes un código de descuento? <input type='text' name='discount' id='discount'><br>";
+    echo "<button type='submit'>Proceder al Checkout</button>"; // Botón de envío
+    echo "</form>";
+
 }
+
 
 
 

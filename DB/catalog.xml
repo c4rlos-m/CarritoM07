@@ -3,7 +3,7 @@
     <product>
         <id>1</id>
         <name>Smartphone</name>
-        <stock>129</stock>
+        <stock>113</stock>
         <price>299.99</price>
     </product>
     <product>
@@ -15,19 +15,19 @@
     <product>
         <id>3</id>
         <name>Tablet</name>
-        <stock>31</stock>
+        <stock>19</stock>
         <price>199.99</price>
     </product>
     <product>
         <id>4</id>
         <name>Wireless Mouse</name>
-        <stock>44</stock>
+        <stock>40</stock>
         <price>24.99</price>
     </product>
     <product>
         <id>5</id>
         <name>Keyboard</name>
-        <stock>79</stock>
+        <stock>77</stock>
         <price>49.99</price>
     </product>
     <product>
