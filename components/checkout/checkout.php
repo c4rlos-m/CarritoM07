@@ -16,6 +16,13 @@ function getUserBalance($username){
     return null;
 }
 
+function shippingCost($total){
+    if($total > 50){
+        return 0;
+    }else{
+        return 5;
+    }
+}
 
 function checkout() {
     if (!isLogged()) {
@@ -73,11 +80,12 @@ function checkout() {
     }
     //verificar los descuentos
 
+    
     if (isset($_GET['discount'])) {
         $discountCode = $_GET['discount'];
         $discountData = getDiscount($discountCode);
-
         if ($discountData) {
+            
             $discountCode = $discountData['code'];
             $discountPercentage = $discountData['percentage'];
 
@@ -94,6 +102,9 @@ function checkout() {
     echo "<tr><td colspan='3' align='right'><strong>Total:</strong></td><td id='cart-total'>{$total} {$currency}</td></tr>";
 
     echo "</table>";
+
+
+
 
     // Verificar si el usuario tiene suficiente saldo
     foreach ($user->user as $userData) {
@@ -120,16 +131,16 @@ function checkout() {
     }
 
     // Mostrar el total de la compra
-    echo "<h3>Total final de la compra: {$total} {$currency}</h3>";
+    // echo "<h3>Total final de la compra: {$total} {$currency}</h3>";
 
     // Limpiar el carrito después de la compra
     clearCart();
 
     // Mostrar un resumen final con los productos comprados
-    echo "<h3>Resumen de productos comprados:</h3>";
-    echo $orderDetails;
+    // echo "<h3>Resumen de productos comprados:</h3>";
+    // echo $orderDetails;
 
-    header("refresh:30;url=main.php");  // Redireccionar a la página principal después de 5 segundos
+    header("refresh:30;url=main.php");  
 }
 
 ?>

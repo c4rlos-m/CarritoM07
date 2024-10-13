@@ -33,6 +33,6 @@
                 <price>299.98</price>
             </item>
         </purchase>
-    </purchases>
+    <purchase id="670beeb97d410"><item><product_id>1</product_id><quantity>2</quantity><price>599.98</price></item></purchase></purchases>
     
 </account>
