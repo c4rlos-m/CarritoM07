@@ -36,7 +36,6 @@ function checkout() {
 
     // Variables para almacenar el total y posibles descuentos
     $total = 0;
-    $discounts = 0;
     $currency = "€";  // Suponiendo que la moneda predeterminada sea euros
     $orderDetails = "";  // Para almacenar los detalles de la compra
 

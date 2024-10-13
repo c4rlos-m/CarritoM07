@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<account>
+    <username>pepe</username>
+    <created_at>2024-10-13 14:39:17</created_at>
+    <items>
+        
+    </items>
+
+    <purchases>
+        <purchase id="670bc3ac2cb4f">
+            <item>
+                <product_id>1</product_id>
+                <quantity>4</quantity>
+                <price>1799.94</price>
+            </item>
+            <item>
+                <product_id>2</product_id>
+                <quantity>4</quantity>
+                <price>3599.96</price>
+            </item>
+        </purchase>
+        <purchase id="670bc3da267b8">
+            <item>
+                <product_id>5</product_id>
+                <quantity>2</quantity>
+                <price>99.98</price>
+            </item>
+        </purchase>
+        <purchase id="670bc79b386d5">
+            <item>
+                <product_id>10</product_id>
+                <quantity>2</quantity>
+                <price>299.98</price>
+            </item>
+        </purchase>
+    </purchases>
+    
+</account>

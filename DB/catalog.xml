@@ -3,13 +3,13 @@
     <product>
         <id>1</id>
         <name>Smartphone</name>
-        <stock>71</stock>
+        <stock>65</stock>
         <price>299.99</price>
     </product>
     <product>
         <id>2</id>
         <name>Laptop</name>
-        <stock>16</stock>
+        <stock>10</stock>
         <price>899.99</price>
     </product>
     <product>
@@ -27,7 +27,7 @@
     <product>
         <id>5</id>
         <name>Keyboard</name>
-        <stock>77</stock>
+        <stock>75</stock>
         <price>49.99</price>
     </product>
     <product>
@@ -57,7 +57,7 @@
     <product>
         <id>10</id>
         <name>Monitor 24"</name>
-        <stock>7</stock>
+        <stock>1</stock>
         <price>149.99</price>
     </product>
 </products>
