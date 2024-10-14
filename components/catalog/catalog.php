@@ -14,25 +14,25 @@ function getCatalogFile(){
 }
 
 function getItemPrice($prod_id) {
-    $catalog = getCatalogFile(); // Obtener el archivo de catálogo
+    $catalog = getCatalogFile(); 
 
     foreach ($catalog->product as $item) {
         if ((string)$item->id === (string)$prod_id) {
-            return (float)$item->price; // Retornar el precio del producto
+            return (float)$item->price; 
         }
     }
-    return null; // Retornar null si no se encuentra el producto
+    return null; 
 }
 
 function getItemStock($prod_id) {
-    $catalog = getCatalogFile(); // Obtener el archivo de catálogo
+    $catalog = getCatalogFile(); 
 
     foreach ($catalog->product as $item) {
         if ((string)$item->id === (string)$prod_id) {
-            return (int)$item->stock; // Retornar el stock del producto
+            return (int)$item->stock; 
         }
     }
-    return null; // Retornar null si no se encuentra el producto
+    return null; 
 }
 
 function addStock($prod_id, $quantity){
@@ -51,6 +51,20 @@ function addStock($prod_id, $quantity){
     }
 }
 
+function addProducttoCatalog($prod_id, $name, $price, $stock){
+    $catalog = getCatalogFile();
+
+    $newProduct = $catalog->addChild('product');
+    $newProduct->addChild('id', $prod_id);
+    $newProduct->addChild('name', $name);
+    $newProduct->addChild('price', $price);
+    $newProduct->addChild('stock', $stock);
+
+    if($catalog->asXML('DB/catalog.xml')){
+        echo "Producto añadido correctamente <br>";
+    }
+}
+
 function removeStock($prod_id, $quantity){
     $catalog = getCatalogFile();
 
@@ -58,17 +72,17 @@ function removeStock($prod_id, $quantity){
         if ((string)$item->id === (string)$prod_id) {
             $currentStock = (int)$item->stock;
             if ($currentStock >= $quantity) {
-                $item->stock = $currentStock - $quantity; // Actualiza el stock
+                $item->stock = $currentStock - $quantity; 
                 echo "Stock actualizado correctamente para el producto ID $prod_id.<br>";
                 break;
             } else {
                 echo "Error: No hay suficiente stock para reducir.<br>";
-                return; // Detener si no hay suficiente stock
+                return; 
             }
         }
     }
 
-    // Guardar el catálogo actualizado
+    
     if ($catalog->asXML('DB/catalog.xml')) {
         echo "Stock guardado correctamente en el catálogo.<br>";
     } else {

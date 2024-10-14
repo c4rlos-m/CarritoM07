@@ -217,17 +217,22 @@ function updateCart($prod_id, $quantity) {
 function removeProduct($prod_id, $quantity) {
     $cart = getCart();
 
+    if (!$cart || !isset($cart->items)) {
+        echo "Carrito no encontrado.";
+        return;
+    }
+
     $productFound = false;
 
-    foreach ($cart->order as $order) {
-        if ((string)$order->product_id === (string)$prod_id) {
-            // Verificar si la cantidad a eliminar es menor que la cantidad actual
-            if ((int)$order->quantity > $quantity) {
-                $order->quantity = (int)$order->quantity - $quantity;
+    foreach ($cart->items->item as $item) { // Corregir el acceso al nodo <item>
+        if ((string)$item->product_id === (string)$prod_id) {
+
+            if ((int)$item->quantity > $quantity) {
+                $item->quantity = (int)$item->quantity - $quantity;
                 echo "Cantidad del producto actualizada correctamente.";
                 $productFound = true;
-            } elseif ((int)$order->quantity === $quantity) {
-                $dom = dom_import_simplexml($order);
+            } elseif ((int)$item->quantity === $quantity) {
+                $dom = dom_import_simplexml($item);
                 $dom->parentNode->removeChild($dom);
                 echo "Producto eliminado del carrito.";
                 $productFound = true;
@@ -239,7 +244,6 @@ function removeProduct($prod_id, $quantity) {
         }
     }
 
-    // Guardar el carrito actualizado usando saveCart
     if ($productFound) {
         saveCart($cart);
     } else {
@@ -248,17 +252,18 @@ function removeProduct($prod_id, $quantity) {
 }
 
 
+
 function addToCart($prod_id, $quantity) {
     $cart = getCart();
     if (!$cart) {
-        return; // Si no hay carrito, detener el proceso.
+        return; 
     }
 
     $productExists = false;
-    $price = getItemPrice($prod_id);  // Obtener el precio del producto
+    $price = getItemPrice($prod_id);  
     foreach ($cart->order as $order) {
         if ((string)$order->product_id === (string)$prod_id) {
-            $order->quantity = intval($order->quantity) + $quantity; // Sumar cantidad
+            $order->quantity = intval($order->quantity) + $quantity; 
             $productExists = true;
 
             if (saveCart($cart)) {
@@ -270,7 +275,7 @@ function addToCart($prod_id, $quantity) {
         }
     }
 
-    // Si el producto no existe, añadirlo
+    
     if (!$productExists) {
         addProduct($prod_id, $quantity);
     }
@@ -284,16 +289,17 @@ function removeFromCart($prod_id, $quantity) {
     }
 
     $cart = getCart();
-    if (!$cart) {
+    if (!$cart || !isset($cart->items)) {
+        echo "Carrito no encontrado.";
         return;
     }
 
-    foreach ($cart->order as $order) {
-        if ((string)$order->product_id === (string)$prod_id) {
-            $order->quantity = intval($order->quantity) - $quantity;
+    foreach ($cart->items->item as $item) { // Corregir el acceso al nodo <item>
+        if ((string)$item->product_id === (string)$prod_id) {
+            $item->quantity = intval($item->quantity) - $quantity;
 
-            if ($order->quantity <= 0) {
-                $dom = dom_import_simplexml($order);
+            if ($item->quantity <= 0) {
+                $dom = dom_import_simplexml($item);
                 $dom->parentNode->removeChild($dom);
                 echo "Producto eliminado del carrito correctamente <br>";
             } else {
@@ -310,22 +316,23 @@ function removeFromCart($prod_id, $quantity) {
 
 
 
+
 function viewCart() {
     if (!isLogged()) {
         echo "Debe iniciar sesión para ver el carrito.";
         return;
     }
 
-    $cart = getCart(); // Cargar el carrito del usuario desde su archivo XML
+    $cart = getCart(); 
     if (!$cart) {
         echo "No se encontró el carrito.";
-        return; // Si no hay carrito, detener la ejecución
+        return; 
     }
 
-    // Verificar si el carrito tiene items
-    if (empty($cart->items->item)) { // Cambiado para verificar si está vacío
+    
+    if (empty($cart->items->item)) { 
         echo "El carrito está vacío.";
-        return; // Salir si el carrito está vacío
+        return; 
     }
 
     echo "<h2>Contenido del Carrito:</h2>";
@@ -334,12 +341,12 @@ function viewCart() {
 
     $totalCart = 0;
 
-    // Iterar sobre los items en el carrito
+    
     foreach ($cart->items->item as $item) {
         $product_id = (string)$item->product_id;  
         $quantity = (int)$item->quantity;         
 
-        // Obtener el precio del producto usando la función existente
+        
         $price = getItemPrice($product_id);
         
         // Calcular el total del producto
@@ -354,15 +361,15 @@ function viewCart() {
         echo "</tr>";
     }
 
-    // Mostrar el total del carrito
+    
     echo "<tr><td colspan='3' align='right'><strong>Total del Carrito:</strong></td><td id='cart-total'>{$totalCart}</td></tr>";
     echo "</table>";
 
-    // Formulario para el código de descuento
+    
     echo "<form id='discount-form' action='main.php' method='GET'>";
-    echo "<input type='hidden' name='action' value='checkout'>"; // Campo oculto para la acción
+    echo "<input type='hidden' name='action' value='checkout'>"; 
     echo "¿Tienes un código de descuento? <input type='text' name='discount' id='discount'><br>";
-    echo "<button type='submit'>Proceder al Checkout</button>"; // Botón de envío
+    echo "<button type='submit'>Proceder al Checkout</button>"; 
     echo "</form>";
 }
 

@@ -34,38 +34,38 @@ function checkout() {
     if (!$cart || empty($cart->items->item)) {
         echo "El carrito está vacío. No se puede proceder al checkout.";
         echo "<br><a href='main.php'>Volver al catálogo</a>";
-        return; // Salir si el carrito está vacío
+        return; 
     }
     
     $username = $_SESSION['username'];
-    $user = getUserFile();  // Obtener el archivo XML de usuarios
+    $user = getUserFile();  
 
 
-    // Variables para almacenar el total y posibles descuentos
+    
     $total = 0;
-    $currency = "€";  // Suponiendo que la moneda predeterminada sea euros
-    $orderDetails = "";  // Para almacenar los detalles de la compra
+    $currency = "€";  
+    $orderDetails = "";  
 
     echo "<h2>Resumen de la compra para $username:</h2>";
     echo "<table border='1' cellpadding='5' cellspacing='0'>";
     echo "<tr><th>Producto ID</th><th>Cantidad</th><th>Precio Unitario</th><th>Total Producto</th></tr>";
 
-    // Recorrer los productos en el carrito
+    
     foreach ($cart->items->item as $item) {
         $prod_id = (string)$item->product_id;
         $quantity = (int)$item->quantity;
-        $price = getItemPrice($prod_id);  // Obtener el precio del producto desde el catálogo
+        $price = getItemPrice($prod_id);  
 
         if ($price === null) {
             echo "Error: Producto $prod_id no encontrado en el catálogo.<br>";
             continue;
         }
 
-        // Calcular el total por producto
+        
         $totalProduct = $quantity * $price;
         $total += $totalProduct;
 
-        // Mostrar el detalle del producto
+        
         echo "<tr>";
         echo "<td>{$prod_id}</td>";
         echo "<td>{$quantity}</td>";
@@ -74,12 +74,11 @@ function checkout() {
         echo "</tr>";
 
         
-        // Guardar detalles del pedido para el resumen
+        
         $orderDetails .= "Producto ID: {$prod_id}, Cantidad: {$quantity}, Total: {$totalProduct} {$currency}<br>";
 
     }
-    //verificar los descuentos
-
+    
     
     if (isset($_GET['discount'])) {
         $discountCode = $_GET['discount'];
@@ -106,7 +105,7 @@ function checkout() {
 
 
 
-    // Verificar si el usuario tiene suficiente saldo
+    
     foreach ($user->user as $userData) {
         if ((string)$userData->username === $username) {
             $currentBalance = (float)$userData->balance;
@@ -116,14 +115,14 @@ function checkout() {
                 return;
             }
 
-            // Actualizar el saldo del usuario
+            
             $userData->balance = $currentBalance - $total;
             echo "<p>Compra realizada con éxito. Nuevo saldo: " . $userData->balance . " {$currency}</p>";
             break;
         }
     }
 
-    // Guardar la actualización del saldo en el archivo XML de usuarios
+    
     if ($user->asXML('DB/users.xml')) {
         echo "<p>Saldo actualizado correctamente.</p>";
     } else {
@@ -133,7 +132,7 @@ function checkout() {
     // Mostrar el total de la compra
     // echo "<h3>Total final de la compra: {$total} {$currency}</h3>";
 
-    // Limpiar el carrito después de la compra
+    
     clearCart();
 
     // Mostrar un resumen final con los productos comprados

@@ -25,7 +25,7 @@ function logout() {
 }
 
 function isLogged() {
-    // Verificar si el usuario está logueado
+    
     return isset($_SESSION['username']);
 }
 

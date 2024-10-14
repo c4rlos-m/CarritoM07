@@ -3,7 +3,13 @@
     <username>pepe</username>
     <created_at>2024-10-13 14:39:17</created_at>
     <items>
-        
+
+
+        <item>
+            <product_id>1</product_id>
+            <quantity>1</quantity>
+            <price>599.98</price>
+        </item>
     </items>
 
     <purchases>
@@ -33,6 +39,41 @@
                 <price>299.98</price>
             </item>
         </purchase>
-    <purchase id="670beeb97d410"><item><product_id>1</product_id><quantity>2</quantity><price>599.98</price></item></purchase></purchases>
-    
+        <purchase id="670beeb97d410">
+            <item>
+                <product_id>1</product_id>
+                <quantity>2</quantity>
+                <price>599.98</price>
+            </item>
+        </purchase>
+        <purchase id="670d261421749">
+            <item>
+                <product_id>1</product_id>
+                <quantity>10</quantity>
+                <price>2999.9</price>
+            </item>
+        </purchase>
+        <purchase id="670d281f794ae">
+            <item>
+                <product_id>1</product_id>
+                <quantity>2</quantity>
+                <price>599.98</price>
+            </item>
+        </purchase>
+        <purchase id="670d326db40b1">
+            <item>
+                <product_id>1</product_id>
+                <quantity>2</quantity>
+                <price>599.98</price>
+            </item>
+        </purchase>
+        <purchase id="670d37767d35d">
+            <item>
+                <product_id>1</product_id>
+                <quantity>2</quantity>
+                <price>599.98</price>
+            </item>
+        </purchase>
+    </purchases>
+
 </account>

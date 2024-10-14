@@ -1,35 +1,35 @@
 
 .header-container {
     display: flex;
-    justify-content: space-between; /* Distribuir elementos a los lados opuestos */
-    align-items: center; /* Alinear verticalmente los elementos */
+    justify-content: space-between;
+    align-items: center; 
     padding: 10px;
-    border-bottom: 1px solid #423ec6; /* Línea separadora si quieres */
-    margin-bottom: 20px; /* Espacio debajo del contenedor */
+    border-bottom: 1px solid #423ec6; 
+    margin-bottom: 20px; 
 }
 
 .welcome-message {
-    margin: 0; /* Eliminar márgenes de los títulos */
-    font-size: 20px; /* Ajustar el tamaño de la fuente según prefieras */
+    margin: 0; 
+    font-size: 20px; 
     font-weight: bold;
 }
 
 .balance-info {
-    margin: 0; /* Eliminar márgenes de los títulos */
-    font-size: 20px; /* Ajustar el tamaño de la fuente */
+    margin: 0; 
+    font-size: 20px; 
     font-weight: bold;
 }
 
-/* Estilos para la fila de descuentos */
+
 .discount-row {
-    background-color: #e6f7e6; /* Fondo verde claro para descuentos */
-    font-weight: bold; /* Negrita para el texto */
+    background-color: #e6f7e6;
+    font-weight: bold; 
 }
 
-/* Estilos para la cantidad del descuento */
+
 .discount-amount {
-    color: #e31111; /* Color verde oscuro */
-    font-size: 16px; /* Tamaño de fuente */
+    color: #e31111; 
+    font-size: 16px; 
 }
 
 #cart-total{
@@ -38,37 +38,35 @@
     font-size: medium;
 }
 
-/* Estilos para las filas de error */
 .error-row {
-    background-color: #f8d7da; /* Fondo rojo claro para errores */
-    color: #bb1a2a; /* Color rojo oscuro */
-    font-weight: bold; /* Negrita para el texto */
-    /* text-transform: uppercase; */
+    background-color: #f8d7da;
+    color: #bb1a2a; 
+    font-weight: bold; 
+    
 }
 
-/* Estilos para el código de descuento en error */
+
 .discount-code {
-    text-decoration: underline; /* Subrayar el código de descuento */
-    color: #c82333; /* Color rojo oscuro para el código */
+    text-decoration: underline; 
+    color: #c82333; 
     text-transform: uppercase;
 }
 
 
-/* Estilos generales para la tabla */
 
 table {
-    width: 50%; /* Ajustar el ancho de la tabla */
-    border-collapse: collapse; /* Elimina los espacios entre las celdas */
-    margin: 0; /* Margen superior e inferior */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para la tabla */
-    border-radius: 8px; /* Bordes redondeados */
-    overflow: hidden; /* Para que el borde redondeado funcione */
+    width: 50%; 
+    border-collapse: collapse; 
+    margin: 0; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px;
+    overflow: hidden; 
 }
 
-/* Estilos para las celdas de la tabla */
+
 table th, table td {
-    border: 1px solid #ddd; /* Borde alrededor de las celdas */
-    padding: 12px; /* Espaciado interno */
+    border: 1px solid #ddd; 
+    padding: 12px; 
     text-align: left; /* Alinear texto a la izquierda */
     transition: background-color 0.3s; /* Transición suave para el fondo */
 }

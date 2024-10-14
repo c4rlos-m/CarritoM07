@@ -1,7 +1,5 @@
 <?php 
 
-
-
 function getUserFile(){
     $userFile = 'DB/users.xml'; 
 

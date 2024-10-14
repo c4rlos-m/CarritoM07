@@ -6,29 +6,29 @@ function getDiscountsFile(){
 }
 
 function getDiscount($discountCode) {
-    $discounts = getDiscountsFile(); // Obtener el archivo de descuentos
+    $discounts = getDiscountsFile(); 
 
     foreach ($discounts->discount as $discount) {
         if ((string)$discount->code === (string)$discountCode) {
             return [
-                'code' => (string)$discount->code, // Retornar el código de descuento
-                'percentage' => (float)$discount->percentage // Retornar el monto del descuento
+                'code' => (string)$discount->code, 
+                'percentage' => (float)$discount->percentage 
             ];
         }
     }
-    return null; // Retornar null si no se encuentra el descuento
+    return null; 
 }
 
 
 function verifyDiscount($discountCode) {
-    $discounts = getDiscountsFile(); // Obtener el archivo de descuentos
+    $discounts = getDiscountsFile(); 
 
     foreach ($discounts->discount as $discount) {
         if ((string)$discount->code === (string)$discountCode) {
-            return true; // Retornar true si el descuento es válido
+            return true; 
         }
     }
-    return false; // Retornar false si el descuento no es válido
+    return false; 
 }
 
 ?>
