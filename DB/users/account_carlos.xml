@@ -2,4 +2,16 @@
 <account>
     <username>carlos</username>
     <created_at>2024-10-14 19:56:25</created_at>
+    <items>
+
+    </items>
+    <purchases>
+        <purchase id="670ff3259c98e">
+            <item>
+                <product_id>1</product_id>
+                <quantity>4</quantity>
+                <price>1199.96</price>
+            </item>
+        </purchase>
+    </purchases>
 </account>

@@ -1,5 +1,5 @@
 <?php 
-include_once 'components/user/login.php';
+include_once 'com/user/login.php';
 
 function createCartFile($username) {
     $cartFile = 'DB/users/account_' . $username . '.xml';

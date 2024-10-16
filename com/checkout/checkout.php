@@ -1,7 +1,7 @@
 <?php
 
-include_once 'components/user/user.php';
-include_once 'components/discounts/discounts.php';
+include_once 'com/user/user.php';
+include_once 'com/discounts/discounts.php';
 
 
 function getUserBalance($username){

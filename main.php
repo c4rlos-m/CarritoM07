@@ -7,10 +7,10 @@
 <?php
 session_start();
 
-include 'components/user/user.php';  
-include 'components/cart/cart.php';  
-include 'components/catalog/catalog.php';  
-include 'components/checkout/checkout.php';  
+include 'com/user/user.php';  
+include 'com/cart/cart.php';  
+include 'com/catalog/catalog.php';  
+include 'com/checkout/checkout.php';  
 
 
 if (!isset($_SESSION['username'])) {
